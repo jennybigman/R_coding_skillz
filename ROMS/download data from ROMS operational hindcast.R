@@ -47,6 +47,7 @@
 	temp_df$latitude <- lats[cbind(temp_df$Xi, temp_df$Eta)]
 
 	# save output as .csv
+	
 	fwrite(temp_df, "./ROMS/bottom_temp_1970-1974.csv")
 	
 	
