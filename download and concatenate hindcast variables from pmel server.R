@@ -6,7 +6,7 @@ library(abind)
 # Setup
 #-------------------
 
-yrblock <- seq(1985, 2010, by=5) # Calibration block ####### change this to 1970, 2020!!!!!
+yrblock <- seq(1970, 2015, by=5) # Calibration block ####### change this to 1970, 2020!!!!!
 
 # Variable to read 
 
@@ -15,7 +15,7 @@ vname2 <- "temp"          # Variable name in file
 
 # Simulation names
 
-hcsim <- "B10K-K20_CORECFS"                  # hindcast
+hcsim <- "B10K-H16_CORECFS"                  # hindcast ##### change to K20 when it is back on
 
 # The naming conventions for files are slightly different on mox compared to on the 
 # PMEL server (PMEL server adds an extra folder level, with 5-year blocks).  In this script,
