@@ -4,10 +4,13 @@
 	library(gt)
   library(gtsummary)
 	library(modelsummary)
+	library(here)
+
+	pollock_dat <- read.csv(here("lagdat.csv"))
   
-  mod1 <- lm(log_wt_scaled ~ julian_day, data = pollock_dat)
-  mod2 <- lm(log_wt_scaled ~ south.sst.amj + julian_day, data = pollock_dat)
-  mod3 <- lm(log_wt_scaled ~ south.sst.amj * age_f + julian_day, data = pollock_dat)
+  mod1 <- lm(log_sc_weight ~ julian, data = pollock_dat)
+  mod2 <- lm(log_sc_weight ~ sst.amj + julian, data = pollock_dat)
+  mod3 <- lm(log_sc_weight ~ sst.amj * as.factor(AGE) + julian, data = pollock_dat)
 
   mod3_sum <- summary(mod3)[[4]] %>% as.data.frame()
   
@@ -29,5 +32,5 @@
   	
  mod3_table_gt <- gt(mod3_table)
  
- gtsave(mod3_table_gt, file = here("./output/example_table.png"))
+ gtsave(mod3_table_gt, file = here("./example_table.docx"))
 	

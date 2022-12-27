@@ -15,7 +15,9 @@ vname2 <- "temp"          # Variable name in file
 
 # Simulation names
 
-hcsim <- "B10K-H16_CORECFS"                  # hindcast ##### change to K20 when it is back on
+#hcsim <- "B10K-H16_CORECFS"                  # hindcast ##### change to K20 when it is back on
+
+hcsim_updated <- "B10K-K20P19_CORECFS"
 
 # The naming conventions for files are slightly different on mox compared to on the 
 # PMEL server (PMEL server adds an extra folder level, with 5-year blocks).  In this script,
@@ -31,10 +33,10 @@ tdsbase <- "https://data.pmel.noaa.gov/aclim/thredds/dodsC" # top-level folder, 
 	for (yr in yrblock) {
 
   fname <- file.path(tdsbase, 
-                     hcsim, 
+                     hcsim_updated, 
                      "Level2",
                      paste0(yr, "-", yr+4), 
-                     paste0(hcsim, "_", yr, "-", yr+4, "_average_", vname1, ".nc"))
+                     paste0(hcsim_updated, "_", yr, "-", yr+4, "_average_", vname1, ".nc"))
   
   # Read data
   
@@ -57,4 +59,6 @@ tdsbase <- "https://data.pmel.noaa.gov/aclim/thredds/dodsC" # top-level folder, 
     thc <- c(thc, ttmp)
     vhc <- abind(vhc, vtmp)
   }
-}
+	}
+
+dim(vhc)
