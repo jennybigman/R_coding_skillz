@@ -1,5 +1,3 @@
-	# download and transform level 2 hindcast output
-
 	library(ncdf4)
 	library(thredds)
 	library(reshape2)
@@ -10,14 +8,20 @@
 
 	#### hindcast temps ####
 	
+	hcsim <- "B10K-K20_CORECFS"  # hindcast
+	vname1 <- "temp_bottom5m"    # Variable name in filename
+	vname2 <- "temp"             # Variable name in file
+	tdsbase <- "https://data.pmel.noaa.gov/aclim/thredds/dodsC" # top-level folder, PMEL server
+	
+	
 	hindcast_download_func <- function(yr){
 
 	# set up filepath
   fname <- file.path(tdsbase, 
-                     hcsim_updated, 
+                     hcsim, 
                      "Level2",
                      paste0(yr, "-", yr + 4), 
-                     paste0(hcsim_updated, "_", yr, "-", yr + 4, "_average_", vname1, ".nc"))
+                     paste0(hcsim, "_", yr, "-", yr + 4, "_average_", vname1, ".nc"))
   
   # read data
   ncin <- nc_open(fname)
@@ -28,7 +32,7 @@
   ocean_time <- ncvar_get(ncin, "ocean_time")
   
   # get temp
-  temp_array <- ncvar_get(ncin, "temp") # can change this to whatever variable you need
+  temp_array <- ncvar_get(ncin, "temp")
   
   # assign dim names and ocean_time
   xi_axis  <- seq(1,182) # Hardcoded axis length, ROMS coordinates
@@ -67,7 +71,6 @@
 	
 
 	write_csv(temp_hind_dat, file = here("./data/hindcast_temp.csv"))
-
 	#### test plots ####
 	
 	## yearly ###
